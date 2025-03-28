@@ -9,7 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #e2f661db;
             padding: 20px;
         }
         .container {
@@ -19,7 +19,7 @@
             margin: 0 auto;
         }
         .calculator, .credit-tracker {
-            background: white;
+            background: rgba(233, 83, 83, 0.467);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -42,11 +42,11 @@
             font-size: 18px;
             cursor: pointer;
             border: none;
-            background-color: #ddd;
+            background-color: #aecdf6;
             border-radius: 5px;
         }
         button:hover {
-            background-color: #ccc;
+            background-color: #5e9bea;
         }
         .credit-tracker input {
             margin: 5px;
@@ -66,7 +66,7 @@
         <!-- Calculator Section -->
         <div class="calculator">
             <h2>Calculator</h2>
-            <input type="text" id="display" readonly>
+            <input type="text" id="display" >
             <div class="buttons">
                 <button onclick="clearDisplay()">C</button>
                 <button onclick="appendToDisplay('/')">/</button>
