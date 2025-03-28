@@ -69,8 +69,23 @@
             text-align: left;
             background-color: rgba(248, 232, 232, 0.721);
             color: rgb(0, 0, 0);
-            width: max-content;
+            width: 100%;
             border-radius: 10%;
+        }
+        .credit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .delete-btn {
+            background-color: blue;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .delete-btn:hover {
+            background-color: darkblue;
         }
     </style>
 </head>
@@ -167,7 +182,8 @@
             creditList.innerHTML = '';
             credits.forEach((credit, index) => {
                 let li = document.createElement('li');
-                li.innerHTML = `${credit.name}: ₹${credit.amount} <button onclick="deleteCredit(${index})" style="background-color: blue; justify-content: flex-end;">Delete</button>`;
+                li.className = 'credit-item';
+                li.innerHTML = `${credit.name}: ₹${credit.amount} <button class="delete-btn" onclick="deleteCredit(${index})">Delete</button>`;
                 creditList.appendChild(li);
             });
         }
@@ -185,7 +201,10 @@
         }
 
         // Load credits when page loads
-        window.onload = displayCredits;
+        window.onload = function() {
+            displayCredits();
+            updateTotal();
+        };
     </script>
 </body>
 
