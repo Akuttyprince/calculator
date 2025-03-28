@@ -1,0 +1,1 @@
+a simple Let’s build a calculator app with an additional feature to help a shopkeeper track customer credit. Since you’re studying web applications and databases, I’ll create this as a web app using HTML, CSS, and JavaScript for the calculator, and I’ll add a simple text-based credit tracking system that stores data locally (using browser storage)
