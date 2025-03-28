@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +12,22 @@
             background-color: #e2f661db;
             padding: 20px;
         }
+
         .container {
             display: flex;
             justify-content: space-around;
             max-width: 800px;
             margin: 0 auto;
         }
-        .calculator, .credit-tracker {
+
+        .calculator,
+        .credit-tracker {
             background: rgba(233, 83, 83, 0.467);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .display {
             width: 100%;
             height: 40px;
@@ -31,13 +35,15 @@
             margin-bottom: 10px;
             text-align: right;
             padding: 5px;
-          
+
         }
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 5px;
         }
+
         button {
             padding: 15px;
             font-size: 18px;
@@ -46,14 +52,17 @@
             background-color: #aecdf6;
             border-radius: 5px;
         }
+
         button:hover {
             background-color: #5e9bea;
         }
+
         .credit-tracker input {
             margin: 5px;
             padding: 5px;
             width: 80%;
         }
+
         #creditList {
             list-style-type: none;
             padding: 10px;
@@ -65,13 +74,14 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Shopkeeper Calculator & Credit Tracker</h1>
     <div class="container">
         <!-- Calculator Section -->
         <div class="calculator">
             <h2>Calculator</h2>
-            <input type="text" id="display" >
+            <input type="text" id="display" readonly>
             <div class="buttons">
                 <button onclick="clearDisplay()">C</button>
                 <button onclick="appendToDisplay('/')">/</button>
@@ -100,8 +110,9 @@
             <input type="number" id="creditAmount" placeholder="Credit Amount">
             <button onclick="addCredit()">Add Credit</button>
             <ul id="creditList"></ul>
+            <p>Total Credit: ₹<span id="totalCredit">0</span></p>
         </div>
-       
+
     </div>
 
     <script>
@@ -137,22 +148,35 @@
                 credits.push(credit);
                 localStorage.setItem('credits', JSON.stringify(credits));
                 displayCredits();
+                updateTotal();
                 clearInputs();
             } else {
                 alert('Please enter both name and amount!');
             }
         }
+        function updateTotal() {
+            let total = credits.reduce((sum, credit) => sum + credit.amount, 0);
+            document.getElementById('totalCredit').textContent = total;
+        }
+        // Call updateTotal() after displayCredits() in addCredit() and deleteCredit()
+
+
 
         function displayCredits() {
             let creditList = document.getElementById('creditList');
             creditList.innerHTML = '';
-            credits.forEach(credit => {
+            credits.forEach((credit, index) => {
                 let li = document.createElement('li');
-                let button = document.createElement('button');
-                li.textContent = `${credit.name}: ₹${credit.amount}`;
-                button.textContent = `Delete`;
-                creditList.appendChild(li,button);
+                li.innerHTML = `${credit.name}: ₹${credit.amount} <button onclick="deleteCredit(${index})" style="background-color: blue; justify-content: flex-end;">Delete</button>`;
+                creditList.appendChild(li);
             });
+        }
+
+        function deleteCredit(index) {
+            credits.splice(index, 1);
+            localStorage.setItem('credits', JSON.stringify(credits));
+            displayCredits();
+            updateTotal();
         }
 
         function clearInputs() {
@@ -164,4 +188,5 @@
         window.onload = displayCredits;
     </script>
 </body>
+
 </html>
