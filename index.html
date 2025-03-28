@@ -31,6 +31,7 @@
             margin-bottom: 10px;
             text-align: right;
             padding: 5px;
+          
         }
         .buttons {
             display: grid;
@@ -55,8 +56,12 @@
         }
         #creditList {
             list-style-type: none;
-            padding: 0;
+            padding: 10px;
             text-align: left;
+            background-color: rgba(248, 232, 232, 0.721);
+            color: rgb(0, 0, 0);
+            width: max-content;
+            border-radius: 10%;
         }
     </style>
 </head>
@@ -96,6 +101,7 @@
             <button onclick="addCredit()">Add Credit</button>
             <ul id="creditList"></ul>
         </div>
+       
     </div>
 
     <script>
@@ -142,8 +148,10 @@
             creditList.innerHTML = '';
             credits.forEach(credit => {
                 let li = document.createElement('li');
+                let button = document.createElement('button');
                 li.textContent = `${credit.name}: ₹${credit.amount}`;
-                creditList.appendChild(li);
+                button.textContent = `Delete`;
+                creditList.appendChild(li,button);
             });
         }
 
